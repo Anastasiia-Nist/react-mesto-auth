@@ -208,7 +208,6 @@ function App() {
   }
 
   return (
-    //<AppContext.Provider value={{ isLoading, closeAllPopups }}>
     <CurrentUserContext.Provider value={currentUser}>
       <React.Fragment>
         <Header
@@ -284,7 +283,6 @@ function App() {
         />
       </React.Fragment>
     </CurrentUserContext.Provider>
-    //</AppContext.Provider>
   );
 }
 

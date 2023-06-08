@@ -30,6 +30,4 @@
   - Функциональные компоненты,
   - Хуки.
 
-**GitHub Pages:**
-* [Ссылка на GitHub Pages](https://anastasiia-nist.github.io/mesto-react-auth/)
 
