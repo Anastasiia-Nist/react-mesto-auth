@@ -1,0 +1,15 @@
+.header__button_type_burger {
+  display: none;
+  background-color: transparent;
+  border: none;
+  width: 30px;
+  padding: 0;
+}
+@media screen and (max-width: 600px) {
+  .header__button_type_burger {
+    display: block;
+  }
+  .header__button_type_burger.inactive {
+    display: none;
+  }
+}
