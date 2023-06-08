@@ -15,7 +15,7 @@ import { ProtectedRouteElement } from "./ProtectedRoute.js";
 import { Login } from "./Login";
 import { Register } from "./Register";
 import { InfoTooltip } from "./InfoTooltip";
-import * as auth from "./Auth";
+import * as auth from "./../utils/Auth";
 //
 
 function App() {
