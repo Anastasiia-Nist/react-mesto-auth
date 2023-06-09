@@ -1,6 +1,6 @@
 //import { useEffect } from "react";
 import React from "react";
-import {usePopupClose} from "../hooks/usePopupClose";
+import { usePopupClose } from "../hooks/usePopupClose";
 import { AppContext } from "../context/AppContext";
 
 function PopupWithForm({
@@ -13,13 +13,13 @@ function PopupWithForm({
 }) {
   const app = React.useContext(AppContext);
   usePopupClose(isOpen, app.closeAllPopups);
-  
+
   React.useEffect(() => {
     setIsValid(formRef.current.checkValidity());
   }, [children]);
   const [isValid, setIsValid] = React.useState(false);
   const formRef = React.useRef();
-  
+
   return (
     <section
       className={`popup popup-${name} 
@@ -29,10 +29,15 @@ function PopupWithForm({
         <button
           className="popup__button-close"
           type="button"
-          aria-label='Кнопка закрытия'
+          aria-label="Кнопка закрытия"
         />
         <h2 className="popup__title">{title}</h2>
-        <form className="form" name={`${name}Form`} onSubmit={onSubmit} ref={formRef}>
+        <form
+          className="form"
+          name={`${name}Form`}
+          onSubmit={onSubmit}
+          ref={formRef}
+        >
           {children}
           <button disabled={!isValid} className="button-save" type="submit">
             {buttonText}

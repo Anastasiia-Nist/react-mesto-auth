@@ -5,8 +5,7 @@ import { useFormAndValidation } from "../hooks/useFormAndValidation";
 
 export function AddPlacePopup({ isOpen, onAddPlace }) {
   const app = React.useContext(AppContext);
-  const { values, handleChange, errors, isValid, setValues, resetForm } =
-    useFormAndValidation({});
+  const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation({});
 
   React.useEffect(() => {
     resetForm();
@@ -30,7 +29,9 @@ export function AddPlacePopup({ isOpen, onAddPlace }) {
     >
       <div className="form__section">
         <input
-          className={`form__input form__input_card_name ${errors.name && "form__input_invalid"}`}
+          className={`form__input form__input_card_name ${
+            errors.name && "form__input_invalid"
+          }`}
           id="place"
           type="text"
           name="name"
@@ -38,7 +39,7 @@ export function AddPlacePopup({ isOpen, onAddPlace }) {
           minLength="2"
           maxLength="30"
           placeholder="Название"
-          value={values.name || ''}
+          value={values.name || ""}
           onChange={handleChange}
         />
         {!isValid && (
@@ -49,13 +50,15 @@ export function AddPlacePopup({ isOpen, onAddPlace }) {
       </div>
       <div className="form__section">
         <input
-          className={`form__input form__input_card_img ${errors.link && "form__input_invalid"}`}
+          className={`form__input form__input_card_img ${
+            errors.link && "form__input_invalid"
+          }`}
           id="place__link"
           type="url"
           name="link"
           required
           placeholder="Ссылка на картинку"
-          value={values.link || ''}
+          value={values.link || ""}
           onChange={handleChange}
         />
         {!isValid && (

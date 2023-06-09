@@ -7,8 +7,7 @@ import { useFormAndValidation } from "../hooks/useFormAndValidation";
 export function EditProfilePopup({ isOpen, onUpdateUser }) {
   const currentUser = React.useContext(CurrentUserContext);
   const app = React.useContext(AppContext);
-  const { values, handleChange, errors, isValid, setValues, resetForm } =
-    useFormAndValidation({});
+  const { values, handleChange, errors, isValid, setValues, resetForm } = useFormAndValidation({});
 
   React.useEffect(() => {
     resetForm();
@@ -33,7 +32,9 @@ export function EditProfilePopup({ isOpen, onUpdateUser }) {
     >
       <div className="form__section">
         <input
-          className={`form__input form__input_type_name ${errors.name && "form__input_invalid"}`}
+          className={`form__input form__input_type_name ${
+            errors.name && "form__input_invalid"
+          }`}
           id="name"
           type="text"
           name="name"
@@ -41,7 +42,7 @@ export function EditProfilePopup({ isOpen, onUpdateUser }) {
           minLength="2"
           maxLength="40"
           placeholder="Имя"
-          value={values.name || ''}
+          value={values.name || ""}
           onChange={handleChange}
         />
         {!isValid && (
@@ -52,7 +53,9 @@ export function EditProfilePopup({ isOpen, onUpdateUser }) {
       </div>
       <div className="form__section">
         <input
-          className={`form__input form__input_type_career ${errors.about && "form__input_invalid"}`}
+          className={`form__input form__input_type_career ${
+            errors.about && "form__input_invalid"
+          }`}
           id="about"
           type="text"
           name="about"
@@ -60,7 +63,7 @@ export function EditProfilePopup({ isOpen, onUpdateUser }) {
           minLength="2"
           maxLength="200"
           placeholder="О себе"
-          value={values.about || ''}
+          value={values.about || ""}
           onChange={handleChange}
         />
         {!isValid && (

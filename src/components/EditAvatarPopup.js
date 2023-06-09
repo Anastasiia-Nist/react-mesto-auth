@@ -5,8 +5,7 @@ import { useFormAndValidation } from "../hooks/useFormAndValidation";
 
 export function EditAvatarPopup({ isOpen, onUpdateAvatar }) {
   const app = React.useContext(AppContext);
-  const { values, handleChange, errors, isValid, setValues, resetForm } =
-    useFormAndValidation({});
+  const { values, handleChange, errors, isValid,resetForm } = useFormAndValidation({});
 
   React.useEffect(() => {
     resetForm();
@@ -29,7 +28,9 @@ export function EditAvatarPopup({ isOpen, onUpdateAvatar }) {
     >
       <div className="form__section">
         <input
-          className={`form__input form__input_avatar_link ${errors.link && "form__input_invalid"}`}
+          className={`form__input form__input_avatar_link ${
+            errors.link && "form__input_invalid"
+          }`}
           id="avatar"
           type="url"
           name="link"

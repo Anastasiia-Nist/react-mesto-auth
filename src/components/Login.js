@@ -17,7 +17,7 @@ export function Login(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     props.handleLogin(formValue);
-    setFormValue({ password: "" , email: ""});
+    setFormValue({ password: "", email: "" });
   };
 
   return (

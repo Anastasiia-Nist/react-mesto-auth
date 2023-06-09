@@ -5,14 +5,14 @@ function Header({ src, alt, userEmail, onLogOut }) {
   const navMobile = React.useRef();
   const btnBurger = React.useRef();
   const btnClose = React.useRef();
-  
+
   function toggleClick() {
     navMobile.current.classList.toggle("active");
     btnBurger.current.classList.toggle("inactive");
     btnClose.current.classList.toggle("active");
   }
   React.useEffect(() => {
-    navMobile.current.classList.remove("active");;
+    navMobile.current.classList.remove("active");
   }, [onLogOut]);
   return (
     <>

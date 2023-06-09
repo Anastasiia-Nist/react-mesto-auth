@@ -20,13 +20,10 @@ import { AppContext } from "../context/AppContext";
 //
 
 function App() {
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
-    React.useState(false);
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
-    React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-  const [isConfirmationPopupOpen, setisConfirmationPopupOpen] =
-    React.useState(false);
+  const [isConfirmationPopupOpen, setisConfirmationPopupOpen] = React.useState(false);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
 
   const [selectedCard, setSelectedCard] = React.useState({});
@@ -58,11 +55,9 @@ function App() {
   function handleRegister(data) {
     auth
       .register(data)
-      .then((data) => {
-        if (data.typeof !== "undefined") {
-          setIsInfoTooltip(true);
-          navigate("/sign-in", { replace: true });
-        }
+      .then(() => {
+        setIsInfoTooltip(true);
+        navigate("/sign-in", { replace: true }); 
       })
       .catch((err) => {
         console.log(err);
@@ -84,7 +79,7 @@ function App() {
         openInfoTooltip();
         console.log(err);
       })
-      .finally(() => setUserEmail(data.email))
+      .finally(() => setUserEmail(data.email));
   }
 
   function handleLogOut() {

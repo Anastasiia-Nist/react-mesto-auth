@@ -17,7 +17,7 @@ export function Register(props) {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.handleRegister(formValue)
+    props.handleRegister(formValue);
   };
   return (
     <section className="auth">
