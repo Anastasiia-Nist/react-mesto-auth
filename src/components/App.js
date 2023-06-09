@@ -84,12 +84,12 @@ function App() {
     navigate("/sign-in");
   }
 
-  function tokenCheck() {
+  function handleCheckToken() {
     // проверка если у пользователя есть токен в localStorage
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       auth
-        .getContent(jwt)
+        .checkToken(jwt)
         .then(({ data }) => {
           setUserEmail(data.email);
           setIsLoggedIn(true);
@@ -113,7 +113,7 @@ function App() {
   }, [isLoggedIn]);
 
   React.useEffect(() => {
-    tokenCheck();
+    handleCheckToken();
   }, []);
 
   function closeAllPopups() {
@@ -208,7 +208,7 @@ function App() {
   }
 
   return (
-    <AppContext.Provider value={{ isLoading, closeAllPopups }} >
+    <AppContext.Provider value={{ isLoading, closeAllPopups }}>
       <CurrentUserContext.Provider value={currentUser}>
         <Header
           loggedIn={isLoggedIn}

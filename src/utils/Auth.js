@@ -1,11 +1,12 @@
-const BASE_URL = 'https://auth.nomoreparties.co';
+const BASE_URL = "https://auth.nomoreparties.co";
 const BASE_HEADERS = {
-  'Accept': 'application/json',
-  'Content-Type': 'application/json'
-}
+  Accept: "application/json",
+  "Content-Type": "application/json",
+};
 function request(endpoint, options) {
-  return fetch(`${BASE_URL}/${endpoint}`, options)
-  .then(res => checkResult(res))
+  return fetch(`${BASE_URL}/${endpoint}`, options).then((res) =>
+    checkResult(res)
+  );
 }
 
 function checkResult(res) {
@@ -15,32 +16,32 @@ function checkResult(res) {
   return Promise.reject(`Что-то сломалось. Ошибка: ${res.status}`);
 }
 
-export const register = ({password, email}) => {
+export const register = ({ password, email }) => {
   return request(`signup`, {
-    method: 'POST',
+    method: "POST",
     headers: BASE_HEADERS,
-    body: JSON.stringify({password, email})
-  })
-}; 
+    body: JSON.stringify({ password, email }),
+  });
+};
 
 export const authorize = (password, email) => {
   return request(`signin`, {
-    method: 'POST',
+    method: "POST",
     headers: BASE_HEADERS,
     body: JSON.stringify({
       email,
-      password
-    })
-  })
+      password,
+    }),
+  });
 };
 
-export const getContent = (token) => {
+export const checkToken = (token) => {
   return request(`users/me`, {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
-    }
-  })
-}
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
