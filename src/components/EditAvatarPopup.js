@@ -1,17 +1,15 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
 import { AppContext } from "../context/AppContext";
-import { useForm } from "../hooks/useForm";
+import { useFormAndValidation } from "../hooks/useFormAndValidation";
 
-export function EditAvatarPopup({
-  isOpen,
-  onUpdateAvatar,
-}) {
-
+export function EditAvatarPopup({ isOpen, onUpdateAvatar }) {
   const app = React.useContext(AppContext);
-  const {values, handleChange, setValues} = useForm({});
+  const { values, handleChange, errors, isValid, setValues, resetForm } =
+    useFormAndValidation({});
+
   React.useEffect(() => {
-    setValues({});
+    resetForm();
   }, [isOpen]);
 
   function handleSubmit(e) {
@@ -31,15 +29,20 @@ export function EditAvatarPopup({
     >
       <div className="form__section">
         <input
-          className="form__input form__input_avatar_link"
+          className={`form__input form__input_avatar_link ${errors.link && "form__input_invalid"}`}
           id="avatar"
           type="url"
           name="link"
           required
           placeholder="Ссылка на картинку"
-          value={values.link || ''}
+          value={values.link || ""}
           onChange={handleChange}
         />
+        {!isValid && (
+          <span className="form__input-error_active" id="avatar-error">
+            {errors.link}
+          </span>
+        )}
       </div>
     </PopupWithForm>
   );

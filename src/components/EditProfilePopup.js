@@ -2,14 +2,16 @@ import React from "react";
 import PopupWithForm from "./PopupWithForm";
 import { CurrentUserContext } from "../context/CurrentUserContext";
 import { AppContext } from "../context/AppContext";
-import { useForm } from "../hooks/useForm";
+import { useFormAndValidation } from "../hooks/useFormAndValidation";
 
 export function EditProfilePopup({ isOpen, onUpdateUser }) {
   const currentUser = React.useContext(CurrentUserContext);
   const app = React.useContext(AppContext);
-  const {values, handleChange, setValues} = useForm({});
+  const { values, handleChange, errors, isValid, setValues, resetForm } =
+    useFormAndValidation({});
 
   React.useEffect(() => {
+    resetForm();
     setValues(currentUser);
   }, [currentUser, isOpen]);
 
@@ -31,7 +33,7 @@ export function EditProfilePopup({ isOpen, onUpdateUser }) {
     >
       <div className="form__section">
         <input
-          className={`form__input form__input_type_name`}
+          className={`form__input form__input_type_name ${errors.name && "form__input_invalid"}`}
           id="name"
           type="text"
           name="name"
@@ -42,10 +44,15 @@ export function EditProfilePopup({ isOpen, onUpdateUser }) {
           value={values.name || ''}
           onChange={handleChange}
         />
+        {!isValid && (
+          <span className="form__input-error_active" id="avatar-error">
+            {errors.name}
+          </span>
+        )}
       </div>
       <div className="form__section">
         <input
-          className={`form__input form__input_type_career`}
+          className={`form__input form__input_type_career ${errors.about && "form__input_invalid"}`}
           id="about"
           type="text"
           name="about"
@@ -56,6 +63,11 @@ export function EditProfilePopup({ isOpen, onUpdateUser }) {
           value={values.about || ''}
           onChange={handleChange}
         />
+        {!isValid && (
+          <span className="form__input-error_active" id="avatar-error">
+            {errors.about}
+          </span>
+        )}
       </div>
     </PopupWithForm>
   );

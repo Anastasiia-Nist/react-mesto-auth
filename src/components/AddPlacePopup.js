@@ -1,15 +1,15 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
 import { AppContext } from "../context/AppContext";
-import { useForm } from "../hooks/useForm";
+import { useFormAndValidation } from "../hooks/useFormAndValidation";
 
 export function AddPlacePopup({ isOpen, onAddPlace }) {
   const app = React.useContext(AppContext);
-  const {values, handleChange, setValues} = useForm({});
+  const { values, handleChange, errors, isValid, setValues, resetForm } =
+    useFormAndValidation({});
 
   React.useEffect(() => {
-    setValues({})
-
+    resetForm();
   }, [isOpen]);
 
   function handleSubmit(e) {
@@ -30,7 +30,7 @@ export function AddPlacePopup({ isOpen, onAddPlace }) {
     >
       <div className="form__section">
         <input
-          className={`form__input form__input_card_name`}
+          className={`form__input form__input_card_name ${errors.name && "form__input_invalid"}`}
           id="place"
           type="text"
           name="name"
@@ -41,10 +41,15 @@ export function AddPlacePopup({ isOpen, onAddPlace }) {
           value={values.name || ''}
           onChange={handleChange}
         />
+        {!isValid && (
+          <span className="form__input-error_active" id="avatar-error">
+            {errors.name}
+          </span>
+        )}
       </div>
       <div className="form__section">
         <input
-          className={`form__input form__input_card_img `}
+          className={`form__input form__input_card_img ${errors.link && "form__input_invalid"}`}
           id="place__link"
           type="url"
           name="link"
@@ -53,6 +58,11 @@ export function AddPlacePopup({ isOpen, onAddPlace }) {
           value={values.link || ''}
           onChange={handleChange}
         />
+        {!isValid && (
+          <span className="form__input-error_active" id="avatar-error">
+            {errors.link}
+          </span>
+        )}
       </div>
     </PopupWithForm>
   );

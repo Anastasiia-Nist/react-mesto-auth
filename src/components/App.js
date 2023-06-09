@@ -77,14 +77,14 @@ function App() {
       .then((data) => {
         localStorage.setItem("jwt", data.token);
         setIsLoggedIn(true);
-        setUserEmail(data.email);
         navigate("/", { replace: true });
       })
       .catch((err) => {
         setIsInfoTooltip(false);
         openInfoTooltip();
         console.log(err);
-      });
+      })
+      .finally(() => setUserEmail(data.email))
   }
 
   function handleLogOut() {
