@@ -1,37 +1,24 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
 import { AppContext } from "../context/AppContext";
+import { useForm } from "../hooks/useForm";
 
 export function EditAvatarPopup({
   isOpen,
   onUpdateAvatar,
 }) {
-  //const avatarRef = React.useRef();
-  const [link, setLink] = React.useState("");
-  const [linkErrorMessage, setLinkErrorMessage] = React.useState("");
+
   const app = React.useContext(AppContext);
-
+  const {values, handleChange, setValues} = useForm({});
   React.useEffect(() => {
-    setLink("");
-    setLinkErrorMessage("");
+    setValues({});
   }, [isOpen]);
-
-  //валидация
 
   function handleSubmit(e) {
     e.preventDefault();
     onUpdateAvatar({
-      avatar: link,
+      avatar: values.link,
     });
-  }
-  function handleChangeLink(e) {
-    setLink(e.target.value);
-    //валидация
-    if (e.target.typeof !== "url") {
-      setLinkErrorMessage(e.target.validationMessage);
-    } else {
-      setLinkErrorMessage("");
-    }
   }
 
   return (
@@ -50,14 +37,9 @@ export function EditAvatarPopup({
           name="link"
           required
           placeholder="Ссылка на картинку"
-          value={link}
-          onChange={handleChangeLink}
+          value={values.link || ''}
+          onChange={handleChange}
         />
-        {linkErrorMessage && (
-          <span className="form__input-error_active" id="avatar-error">
-            {linkErrorMessage}
-          </span>
-        )}
       </div>
     </PopupWithForm>
   );
