@@ -1,8 +1,10 @@
 import React from "react";
 import {usePopupClose} from "../hooks/usePopupClose";
+import { AppContext } from "../context/AppContext";
 
-function ImagePopup({card, onClose}) {
-  usePopupClose(card.link, onClose);
+function ImagePopup({card}) {
+  const app = React.useContext(AppContext);
+  usePopupClose(card.link, app.closeAllPopups);
   return (
     <section
       className={`popup popup-image ${card.name ? "popup_opened" : ""}`}

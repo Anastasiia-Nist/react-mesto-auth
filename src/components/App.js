@@ -16,6 +16,7 @@ import { Login } from "./Login";
 import { Register } from "./Register";
 import { InfoTooltip } from "./InfoTooltip";
 import * as auth from "./../utils/Auth";
+import { AppContext } from "../context/AppContext";
 //
 
 function App() {
@@ -207,79 +208,72 @@ function App() {
   }
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
-      <Header
-        loggedIn={isLoggedIn}
-        userEmail={userEmail}
-        onLogOut={handleLogOut}
-        src={logo}
-        alt="Логотип Место"
-      />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <ProtectedRouteElement
-              element={Main}
-              loggedIn={isLoggedIn}
-              onEditProfile={handleEditProfileClick}
-              onAddPlace={handleAddPlaceClick}
-              onEditAvatar={handleEditAvatarClick}
-              onCardClick={handleCardClick}
-              cards={cards}
-              onCardLike={handleCardLike}
-              onConfirmationDelete={handleTrashClick}
-            />
-          }
-        ></Route>
-        <Route
-          path="/sign-up"
-          element={<Register handleRegister={handleRegister} />}
+    <AppContext.Provider value={{ isLoading, closeAllPopups }} >
+      <CurrentUserContext.Provider value={currentUser}>
+        <Header
+          loggedIn={isLoggedIn}
+          userEmail={userEmail}
+          onLogOut={handleLogOut}
+          src={logo}
+          alt="Логотип Место"
         />
-        <Route
-          path="/sign-in"
-          element={<Login handleLogin={handleLogin} onLogin={userEmail} />}
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <ProtectedRouteElement
+                element={Main}
+                loggedIn={isLoggedIn}
+                onEditProfile={handleEditProfileClick}
+                onAddPlace={handleAddPlaceClick}
+                onEditAvatar={handleEditAvatarClick}
+                onCardClick={handleCardClick}
+                cards={cards}
+                onCardLike={handleCardLike}
+                onConfirmationDelete={handleTrashClick}
+              />
+            }
+          ></Route>
+          <Route
+            path="/sign-up"
+            element={<Register handleRegister={handleRegister} />}
+          />
+          <Route
+            path="/sign-in"
+            element={<Login handleLogin={handleLogin} onLogin={userEmail} />}
+          />
+          <Route
+            path="*"
+            element={
+              isLoggedIn ? <Navigate to="/" /> : <Navigate to="/sign-in" />
+            }
+          />
+        </Routes>
+        <Footer />
+        <EditAvatarPopup
+          isOpen={isEditAvatarPopupOpen}
+          onUpdateAvatar={handleUpdateAvatar}
         />
-        <Route
-          path="*"
-          element={
-            isLoggedIn ? <Navigate to="/" /> : <Navigate to="/sign-in" />
-          }
+        <EditProfilePopup
+          isOpen={isEditProfilePopupOpen}
+          onUpdateUser={handleUpdateUser}
         />
-      </Routes>
-      <Footer />
-      <EditAvatarPopup
-        isOpen={isEditAvatarPopupOpen}
-        onClose={closeAllPopups}
-        onUpdateAvatar={handleUpdateAvatar}
-        onLoading={isLoading}
-      />
-      <EditProfilePopup
-        isOpen={isEditProfilePopupOpen}
-        onClose={closeAllPopups}
-        onUpdateUser={handleUpdateUser}
-        onLoading={isLoading}
-      />
-      <AddPlacePopup
-        isOpen={isAddPlacePopupOpen}
-        onClose={closeAllPopups}
-        onAddPlace={handleAddPlaceSubmit}
-        onLoading={isLoading}
-      />
-      <ImagePopup card={selectedCard} onClose={closeAllPopups} />
-      <ConfirmationPopup
-        card={deletedCard}
-        isOpen={isConfirmationPopupOpen}
-        onClose={closeAllPopups}
-        onLoading={isLoading}
-        onDelete={handleCardDelete}
-      />
-      <InfoTooltip
-        isOpen={isInfoTooltipOpen}
-        onClose={closeAllPopups}
-        isConfirmationStatus={isInfoTooltip}
-      />
-    </CurrentUserContext.Provider>
+        <AddPlacePopup
+          isOpen={isAddPlacePopupOpen}
+          onAddPlace={handleAddPlaceSubmit}
+        />
+        <ConfirmationPopup
+          card={deletedCard}
+          isOpen={isConfirmationPopupOpen}
+          onDelete={handleCardDelete}
+        />
+        <ImagePopup card={selectedCard} />
+        <InfoTooltip
+          isOpen={isInfoTooltipOpen}
+          isConfirmationStatus={isInfoTooltip}
+        />
+      </CurrentUserContext.Provider>
+    </AppContext.Provider>
   );
 }
 

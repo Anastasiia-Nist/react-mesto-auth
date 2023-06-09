@@ -1,7 +1,9 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
+import { AppContext } from "../context/AppContext";
 
-export function AddPlacePopup({ isOpen, onClose, onAddPlace, onLoading }) {
+export function AddPlacePopup({ isOpen, onAddPlace }) {
+  const app = React.useContext(AppContext);
   const [name, setName] = React.useState("");
   const [link, setLink] = React.useState("");
 
@@ -46,9 +48,8 @@ export function AddPlacePopup({ isOpen, onClose, onAddPlace, onLoading }) {
     <PopupWithForm
       name="cards"
       title="Новое место"
-      buttonText={onLoading ? "Создание..." : "Создать"}
+      buttonText={app.isLoading ? "Создание..." : "Создать"}
       isOpen={isOpen}
-      onClose={onClose}
       onSubmit={handleSubmit}
     >
       <div className="form__section">

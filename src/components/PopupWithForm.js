@@ -1,17 +1,18 @@
 //import { useEffect } from "react";
 import React from "react";
-import {usePopupClose} from "../hooks/usePopupClose"
+import {usePopupClose} from "../hooks/usePopupClose";
+import { AppContext } from "../context/AppContext";
 
 function PopupWithForm({
   isOpen,
-  onClose,
   name,
   title,
   buttonText,
   children,
   onSubmit,
 }) {
-  usePopupClose(isOpen, onClose);
+  const app = React.useContext(AppContext);
+  usePopupClose(isOpen, app.closeAllPopups);
   
   React.useEffect(() => {
     setIsValid(formRef.current.checkValidity());

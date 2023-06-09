@@ -1,15 +1,15 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
+import { AppContext } from "../context/AppContext";
 
 export function EditAvatarPopup({
   isOpen,
-  onClose,
   onUpdateAvatar,
-  onLoading,
 }) {
   //const avatarRef = React.useRef();
   const [link, setLink] = React.useState("");
   const [linkErrorMessage, setLinkErrorMessage] = React.useState("");
+  const app = React.useContext(AppContext);
 
   React.useEffect(() => {
     setLink("");
@@ -38,9 +38,8 @@ export function EditAvatarPopup({
     <PopupWithForm
       name="avatar"
       title="Обновить аватар"
-      buttonText={onLoading ? "Сохранение..." : "Сохранить"}
+      buttonText={app.isLoading ? "Сохранение..." : "Сохранить"}
       isOpen={isOpen}
-      onClose={onClose}
       onSubmit={handleSubmit}
     >
       <div className="form__section">
