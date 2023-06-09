@@ -15,7 +15,7 @@ export function ConfirmationPopup({card, isOpen, onClose, onLoading, onDelete}) 
         buttonText={onLoading ? 'Удаление...' : 'Да'}
         isOpen={isOpen}
         onClose={onClose}
-        onSubmit={hendleDeleteCard}>
-        </PopupWithForm>
+        onSubmit={hendleDeleteCard}
+        />
     )
 }

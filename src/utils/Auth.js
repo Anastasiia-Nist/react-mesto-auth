@@ -1,4 +1,12 @@
 const BASE_URL = 'https://auth.nomoreparties.co';
+const BASE_HEADERS = {
+  'Accept': 'application/json',
+  'Content-Type': 'application/json'
+}
+function request(endpoint, options) {
+  return fetch(`${BASE_URL}/${endpoint}`, options)
+  .then(res => checkResult(res))
+}
 
 function checkResult(res) {
   if (res.ok) {
@@ -8,36 +16,26 @@ function checkResult(res) {
 }
 
 export const register = ({password, email}) => {
-  return fetch(`${BASE_URL}/signup`, {
+  return request(`signup`, {
     method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
+    headers: BASE_HEADERS,
     body: JSON.stringify({password, email})
   })
-  .then(res => checkResult(res))
-  .catch((err) => console.log(err))
 }; 
 
 export const authorize = (password, email) => {
-  return fetch(`${BASE_URL}/signin`, {
+  return request(`signin`, {
     method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
+    headers: BASE_HEADERS,
     body: JSON.stringify({
       email,
       password
     })
   })
-  .then(res => checkResult(res))
-  .catch(err => console.log(err))
 };
 
 export const getContent = (token) => {
-  return fetch(`${BASE_URL}/users/me`, {
+  return request(`users/me`, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
@@ -45,6 +43,4 @@ export const getContent = (token) => {
       'Authorization': `Bearer ${token}`,
     }
   })
-  .then(res => checkResult(res))
-  .catch(err => console.log(err))
 }
