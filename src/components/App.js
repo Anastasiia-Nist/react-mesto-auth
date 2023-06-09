@@ -46,6 +46,15 @@ function App() {
   const [userEmail, setUserEmail] = React.useState("");
   const [isInfoTooltip, setIsInfoTooltip] = React.useState(false);
 
+  // универсальная функция для закрытия попапов, изменения текста кнопки
+  function handleSubmit(request) {
+    setIsLoading(true);
+    request()
+      .then(closeAllPopups)
+      .catch(console.error)
+      .finally(() => setIsLoading(false));
+  }
+
   function handleRegister(data) {
     auth
       .register(data)
@@ -147,37 +156,25 @@ function App() {
   }
 
   function handleUpdateAvatar(data) {
-    setIsLoading(true);
-    api
-      .patchUserAvatar(data.avatar)
-      .then(setCurrentUser)
-      .then(closeAllPopups)
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => setIsLoading(false));
+    function makeRequest() {
+      return api.patchUserAvatar(data.avatar).then(setCurrentUser);
+    }
+    handleSubmit(makeRequest);
   }
   function handleUpdateUser(data) {
-    setIsLoading(true);
-    api
-      .patchUserInfo(data)
-      .then(setCurrentUser)
-      .then(closeAllPopups)
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => setIsLoading(false));
+    function makeRequest() {
+      return api.patchUserInfo(data).then(setCurrentUser);
+    }
+    handleSubmit(makeRequest);
   }
+
   function handleAddPlaceSubmit(data) {
-    setIsLoading(true);
-    api
-      .postNewCard(data)
-      .then((newCard) => setCards([newCard, ...cards]))
-      .then(closeAllPopups)
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => setIsLoading(false));
+    function makeRequest() {
+      return api
+        .postNewCard(data)
+        .then((newCard) => setCards([newCard, ...cards]));
+    }
+    handleSubmit(makeRequest);
   }
 
   function handleCardLike(card) {
