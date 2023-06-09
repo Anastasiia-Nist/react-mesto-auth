@@ -63,7 +63,7 @@ function App() {
         console.log(err);
         setIsInfoTooltip(false);
       })
-      .finally(openInfoTooltip());
+      .finally(openInfoTooltip);
   }
 
   function handleLogin(data) {
