@@ -1,6 +1,6 @@
 import logo from ".././images/logo.svg";
 import React from "react";
-import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
@@ -17,6 +17,7 @@ import { Register } from "./Register";
 import { InfoTooltip } from "./InfoTooltip";
 import * as auth from "./../utils/Auth";
 import { AppContext } from "../context/AppContext";
+import { NotFound } from "./NotFound";
 //
 
 function App() {
@@ -49,7 +50,12 @@ function App() {
     request()
       .then(closeAllPopups)
       .catch(console.error)
-      .finally(() => setIsLoading(false));
+      .finally(() => {
+        const timeout = window.setTimeout(() => {
+          setIsLoading(false);
+          window.clearTimeout(timeout)
+        }, 500)
+      });
   }
 
   function handleRegister(data) {
@@ -236,9 +242,7 @@ function App() {
           />
           <Route
             path="*"
-            element={
-              isLoggedIn ? <Navigate to="/" /> : <Navigate to="/sign-in" />
-            }
+            element={ <NotFound />}
           />
         </Routes>
         <Footer />

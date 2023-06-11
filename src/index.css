@@ -74,3 +74,7 @@
 
 @import url(./blocks/footer/footer.css);
 @import url(./blocks/footer/__copywriter/footer__copywriter.css);
+/* 404 */
+@import url(./blocks/notFound/notFound.css);
+@import url(./blocks/notFound/__img/notFound__img.css);
+@import url(./blocks/notFound/__button/notFound__button.css);
