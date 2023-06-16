@@ -4,12 +4,10 @@ import { Routes, Route, Link } from "react-router-dom";
 function Header({ src, alt, userEmail, onLogOut }) {
   const navMobile = React.useRef();
   const btnBurger = React.useRef();
-  const btnClose = React.useRef();
 
   function toggleClick() {
     navMobile.current.classList.toggle("active");
-    btnBurger.current.classList.toggle("inactive");
-    btnClose.current.classList.toggle("active");
+    btnBurger.current.classList.toggle("active")
   }
   React.useEffect(() => {
     navMobile.current.classList.remove("active");
@@ -65,17 +63,8 @@ function Header({ src, alt, userEmail, onLogOut }) {
                   className="header__button_type_burger"
                   type="button"
                 >
-                  <span className="header__span"></span>
-                  <span className="header__span"></span>
-                  <span className="header__span"></span>
+                  <span className="header__span"></span> 
                 </button>
-                <button
-                  ref={btnClose}
-                  onClick={toggleClick}
-                  className="header__button_type_close"
-                  type="button"
-                  aria-label="Кнопка закрытия"
-                />
               </>
             }
           />

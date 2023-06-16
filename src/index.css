@@ -12,7 +12,6 @@
 @import url(./blocks/header/__email/header__email.css);
 @import url(./blocks/header/__button/_type/_logout/header__button_type_logout.css);
 @import url(./blocks/header/__button/_type/_burger/header__button_type_burger.css);
-@import url(./blocks/header/__button/_type/_close/header__button_type_close.css);
 @import url(./blocks/header/__span/header__span.css);
 
 @import url(./blocks/button-save/button-save.css);

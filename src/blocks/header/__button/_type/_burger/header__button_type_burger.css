@@ -3,13 +3,16 @@
   background-color: transparent;
   border: none;
   width: 30px;
+  height: 26px;
   padding: 0;
+  position: relative;
+  cursor: pointer;
+}
+.header__button_type_burger:hover{
+  opacity: .6;
 }
 @media screen and (max-width: 600px) {
   .header__button_type_burger {
     display: block;
-  }
-  .header__button_type_burger.inactive {
-    display: none;
   }
 }
