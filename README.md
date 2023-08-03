@@ -1,4 +1,4 @@
-# Место на «React» с авторизацией и регистрацией ![React](https://www.vectorlogo.zone/logos/reactjs/reactjs-icon.svg)
+# Фронтенд проекта Mesto на «React» с авторизацией и регистрацией ![React](https://www.vectorlogo.zone/logos/reactjs/reactjs-icon.svg)
 ### *Учебный проект от [Яндекс.Практикум](https://practicum.yandex.ru/web/)*
 
 ### Обзор:
